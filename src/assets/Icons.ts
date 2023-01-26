@@ -34,3 +34,6 @@ export const loanUsers = '/assets/icons/loanUsers.svg';
 export const savingsUsers = '/assets/icons/savingsUsers.svg';
 export const pyramid = '/assets/icons/pyramid.svg';
 export const burger = '/assets/icons/burger.svg';
+export const view = '/assets/icons/view.svg';
+export const blacklist = '/assets/icons/blacklist.svg';
+export const activate = '/assets/icons/activate.svg';
