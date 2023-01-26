@@ -86,10 +86,122 @@
       color: #545f7d;
       border-bottom: 1px solid rgba(33, 63, 125, 0.1);
 
+      p {
+        display: inline-block;
+        height: 30px;
+        padding: 0 12px 0 12px;
+        border-radius: 100px;
+        line-height: 30px;
+        // opacity: 6%;
+        background-color: rgba(84, 95, 125, 0.06);
+      }
+
       img {
-        margin-left: 50px;
+        // margin-left: 55px;
         cursor: pointer;
       }
     }
+
+    .burgerPopUp {
+      box-sizing: border-box;
+      padding: 10px 0 0 25px;
+      height: 130px;
+      width: 180px;
+      background-color: #fff;
+      position: absolute;
+      top: 10px;
+      right: 40px;
+      border-radius: 4px;
+      box-shadow: 3px 5px 20px 0 rgba(0, 0, 0, 0.04);
+      z-index: 10;
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 20px;
+        font-family: Work Sans;
+        font-size: 14px;
+        font-weight: 500px;
+        line-height: 16.42px;
+        color: #545f7d;
+        cursor: pointer;
+
+        img {
+          margin-right: 10px;
+        }
+      }
+    }
+    .withBurger {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Work Sans;
+  color: #545f7d;
+
+  .p {
+    font-size: 14px;
+    line-height: 16.42px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      width: 50px;
+      height: 30px;
+      background-color: rgba(33, 63, 125, 0.1);
+    }
+  }
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin-bottom: 5rem;
+  font-size: 16px;
+  line-height: 18.77px;
+  // gap: 5px;
+
+  .page-num {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+
+    // :first-child {
+    //   background-color: rgba(33, 63, 125, 0.1);
+    //   width: 24px;
+    // }
+  }
+
+  // .next {
+  //   background-color: rgba(33, 63, 125, 0.1);
+  //   width: 24px;
+  // }
+
+  // .page-num:hover {
+  //   background-color: #5ab1bb;
+  //   color: #ffffff;
+  // }
+
+  .active {
+    font-weight: 500;
   }
 }

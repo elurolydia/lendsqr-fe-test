@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   blueUsers,
   burger,
@@ -8,8 +9,33 @@ import {
   savingsUsers,
 } from '../../../assets/Icons';
 import './Dashboard.scss';
+import Paginate from './Paginate';
+// import Pagination from './Pagination';
 
 const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage, setUsersPerPage] = useState(10);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await axios.get(
+        ' https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users '
+      );
+      setUsers(res.data);
+    };
+
+    fetchUsers();
+  }, []);
+
+  //get current posts
+  const indexOfLastPost = currentPage * usersPerPage;
+  const indexOfFirstPost = indexOfLastPost - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstPost, indexOfLastPost);
+
+  //change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className='dashboard'>
       <h1>Users</h1>
@@ -69,13 +95,37 @@ const Dashboard = () => {
           <td>adedeji@lendsqr.com</td>
           <td>08078903721</td>
           <td>May 15, 2020 10:00 AM</td>
-          <td>
-            Inactive <img src={burger} alt='' />
+          <td className='withBurger'>
+            <p>Inactive</p>
+            <img src={burger} alt='' />
           </td>
         </tbody>
+        {currentUsers.map((user) => {
+          return (
+            <tbody key={user.id}>
+              <td>{user.orgName}</td>
+              <td>{user.userName}</td>
+              <td>{user.email}</td>
+              <td>{user.profile.phoneNumber}</td>
+              <td>{Date.parse(user.createdAt)}</td>
+              <td className='withBurger'>
+                <p>Inactive</p>
+                <img src={burger} alt='' />
+              </td>
+            </tbody>
+          );
+        })}
       </table>
 
-      <div></div>
+      <div>
+        <Paginate
+          usersPerPage={usersPerPage}
+          totalUsers={users.length}
+          paginate={paginate}
+        />
+
+        {/* <Pagination /> */}
+      </div>
     </div>
   );
 };
