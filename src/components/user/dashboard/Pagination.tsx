@@ -20,6 +20,9 @@ const Pagination = (props) => {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 10;
 
+  //popus
+  const [burgerPopUp, setBurgerPopUp] = useState(false);
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(data.slice(itemOffset, endOffset));
@@ -93,22 +96,6 @@ const Pagination = (props) => {
             <td className='withBurger'>
               <p>Inactive</p>
               <img src={burger} alt='' />
-              <div className='burgerPopUp'>
-                <ul>
-                  <li>
-                    <img src={view} alt='' />
-                    View Details
-                  </li>
-                  <li>
-                    <img src={blacklist} alt='' />
-                    Blacklist User
-                  </li>
-                  <li>
-                    <img src={activate} alt='' />
-                    Activate User
-                  </li>
-                </ul>
-              </div>
             </td>
           </tbody>
           {currentItems.map((user) => {
@@ -121,7 +108,32 @@ const Pagination = (props) => {
                 <td>{Date.parse(user.createdAt)}</td>
                 <td className='withBurger'>
                   <p>Inactive</p>
-                  <img src={burger} alt='' />
+                  <img
+                    src={burger}
+                    alt=''
+                    onClick={() => {
+                      // return setBurgerPopUp(!burgerPopUp);
+                      console.log(user.id);
+                    }}
+                  />
+                  {burgerPopUp && (
+                    <div className='burgerPopUp'>
+                      <ul>
+                        <li>
+                          <img src={view} alt='' />
+                          View Details
+                        </li>
+                        <li>
+                          <img src={blacklist} alt='' />
+                          Blacklist User
+                        </li>
+                        <li>
+                          <img src={activate} alt='' />
+                          Activate User
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </td>
               </tbody>
             );

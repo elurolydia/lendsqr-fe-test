@@ -1,6 +1,7 @@
 import './Navbar.scss';
 import { arrowDown, bell, logo, search } from '../../../assets/Icons';
 import { avatar } from '../../../assets/Images';
+// let search = require('../../../assets/Icons/search.svg');
 
 const Navbar = () => {
   return (
@@ -10,18 +11,18 @@ const Navbar = () => {
       <div className='search'>
         <input type='text' placeholder='search for anything' />
         <span>
-          <img src={search} alt='' />
+          <img src={`/${search}`} alt='' />
         </span>
       </div>
 
       <div className='navDetails'>
         <span>Docs</span>
-        <img src={bell} alt='' />
+        <img src={`/${bell}`} alt='' />
 
         <div className='avatarDetails'>
-          <img src={avatar} alt='' />
+          <img src={`/${avatar}`} alt='' />
           <span>Adedeji</span>
-          <img src={arrowDown} alt='' className='arrow' />
+          <img src={`/${arrowDown}`} alt='' className='arrow' />
         </div>
       </div>
     </nav>
