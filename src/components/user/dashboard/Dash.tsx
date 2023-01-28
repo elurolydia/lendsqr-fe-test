@@ -28,12 +28,6 @@ const Dash = () => {
 
   return (
     <div>
-      {/* <Paginate
-          usersPerPage={usersPerPage}
-          totalUsers={users.length}
-          paginate={paginate}
-        /> */}
-
       <Pagination data={users} />
     </div>
   );

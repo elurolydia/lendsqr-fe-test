@@ -1,6 +1,6 @@
 // import React {useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import {
   activate,
   blacklist,
@@ -12,6 +12,7 @@ import {
   savingsUsers,
   view,
 } from '../../../assets/Icons';
+import { Link } from 'react-router-dom';
 
 const Pagination = (props) => {
   const { data } = props;
@@ -23,6 +24,21 @@ const Pagination = (props) => {
   //popus
   const [burgerPopUp, setBurgerPopUp] = useState(false);
 
+  //trying
+  const [editId, setEditId] = useState({ id: 1, name: 'gem' });
+  const [selectedDataId, setSelectedDataId] = useState(null);
+
+  const handleBurger = (event, user) => {
+    // event.currentTarget = 'button';
+    // console.log(event.target.parentElement);
+    setSelectedDataId(user.id);
+    // setBurgerPopUp(false);
+    // user.email = 'me';
+  };
+
+  const handleBurgerOff = (event, user) => setSelectedDataId(null);
+
+  //continue
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(data.slice(itemOffset, endOffset));
@@ -33,6 +49,7 @@ const Pagination = (props) => {
     const newOffset = (event.selected * itemsPerPage) % data.length;
     setItemOffset(newOffset);
   };
+
   return (
     <>
       <div className='dashboard'>
@@ -62,32 +79,34 @@ const Pagination = (props) => {
 
         <table>
           <thead>
-            <th>
-              <h3>ORGANIZATION</h3>
-              <img src={pyramid} alt='' />
-            </th>
-            <th>
-              <h3>USERNAME</h3>
-              <img src={pyramid} alt='' />
-            </th>
-            <th>
-              <h3>EMAIL</h3>
-              <img src={pyramid} alt='' />
-            </th>
-            <th>
-              <h3>PHONE NUMBER</h3>
-              <img src={pyramid} alt='' />
-            </th>
-            <th>
-              <h3>DATE JOINED</h3>
-              <img src={pyramid} alt='' />
-            </th>
-            <th>
-              <h3>STATUS</h3>
-              <img src={pyramid} alt='' />
-            </th>
+            <tr>
+              <th>
+                <h3>ORGANIZATION</h3>
+                <img src={pyramid} alt='' />
+              </th>
+              <th>
+                <h3>USERNAME</h3>
+                <img src={pyramid} alt='' />
+              </th>
+              <th>
+                <h3>EMAIL</h3>
+                <img src={pyramid} alt='' />
+              </th>
+              <th>
+                <h3>PHONE NUMBER</h3>
+                <img src={pyramid} alt='' />
+              </th>
+              <th>
+                <h3>DATE JOINED</h3>
+                <img src={pyramid} alt='' />
+              </th>
+              <th>
+                <h3>STATUS</h3>
+                <img src={pyramid} alt='' />
+              </th>
+            </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             <td>Lendsqr</td>
             <td>Adedeji</td>
             <td>adedeji@lendsqr.com</td>
@@ -97,52 +116,83 @@ const Pagination = (props) => {
               <p>Inactive</p>
               <img src={burger} alt='' />
             </td>
-          </tbody>
-          {currentItems.map((user) => {
-            return (
-              <tbody key={user.id}>
-                <td>{user.orgName}</td>
-                <td>{user.userName}</td>
-                <td>{user.email}</td>
-                <td>{user.profile.phoneNumber}</td>
-                <td>{Date.parse(user.createdAt)}</td>
-                <td className='withBurger'>
-                  <p>Inactive</p>
-                  <img
-                    src={burger}
-                    alt=''
-                    onClick={() => {
-                      // return setBurgerPopUp(!burgerPopUp);
-                      console.log(user.id);
-                    }}
-                  />
-                  {burgerPopUp && (
-                    <div className='burgerPopUp'>
-                      <ul>
-                        <li>
-                          <img src={view} alt='' />
-                          View Details
-                        </li>
-                        <li>
-                          <img src={blacklist} alt='' />
-                          Blacklist User
-                        </li>
-                        <li>
-                          <img src={activate} alt='' />
-                          Activate User
-                        </li>
-                      </ul>
-                    </div>
+          </tbody> */}
+          <tbody>
+            {currentItems.map((user) => {
+              return (
+                <Fragment>
+                  {selectedDataId === user.id ? (
+                    <tr key={user.id}>
+                      <td>{user.orgName}</td>
+                      <td>{user.userName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.profile.phoneNumber}</td>
+                      <td>{Date.parse(user.createdAt)}</td>
+                      <td className='withBurger'>
+                        <p>Inactive</p>
+                        <img
+                          src={burger}
+                          alt=''
+                          onClick={(event) => handleBurgerOff(event, user)}
+                        />
+                        <div className='burgerPopUp'>
+                          <ul>
+                            <li>
+                              <Link
+                                to='/user/details'
+                                // state={{ selectedDataId: selectedDataId }}
+                                state={{ user: user }}
+                              >
+                                {/* <Link
+                                to={{
+                                  pathname: '/user/details',
+                                  state: {user},
+                                }}
+                              > */}
+                                <img src={view} alt='' />
+                                View Details
+                              </Link>
+                            </li>
+                            <li>
+                              <img src={blacklist} alt='' />
+                              Blacklist User
+                            </li>
+                            <li>
+                              <img src={activate} alt='' />
+                              Activate User
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={user.id}>
+                      <td>{user.orgName}</td>
+                      <td>{user.userName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.profile.phoneNumber}</td>
+                      <td>{Date.parse(user.createdAt)}</td>
+                      <td className='withBurger'>
+                        <p>Inactive</p>
+
+                        <img
+                          src={burger}
+                          alt=''
+                          onClick={(event) => handleBurger(event, user)}
+                        />
+                      </td>
+                    </tr>
                   )}
-                </td>
-              </tbody>
-            );
-          })}
+                </Fragment>
+              );
+            })}
+          </tbody>
         </table>
       </div>
       <div className='foot'>
         <div className='p'>
-          Showing <p>{itemOffset / pageCount + 1}</p> out of {pageCount}{' '}
+          Showing <p>{currentItems.length ? itemOffset / pageCount + 1 : 0}</p>{' '}
+          out of {pageCount}{' '}
         </div>
         <ReactPaginate
           breakLabel='...'
