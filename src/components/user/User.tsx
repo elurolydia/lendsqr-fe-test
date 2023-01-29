@@ -4,7 +4,7 @@ import Sidebar from './sidebar/Sidebar';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './dashboard/Dashboard';
 import Filter from './Filter';
-import Details from './Details';
+import Details from './dashboard/details/Details';
 import Dash from './dashboard/Dash';
 
 const User = () => {
@@ -17,7 +17,7 @@ const User = () => {
           <Routes>
             {/* <Route path='/' element={<Dashboard />} /> */}
             <Route path='/' element={<Dash />} />
-            {/* <Route path='user/filter' element={<Filter />} />
+            {/* <Route path='filter' element={<Filter />} />
             <Route path='user/details' element={<Details />} /> */}
           </Routes>
         </main>

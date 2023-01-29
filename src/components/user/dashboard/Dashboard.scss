@@ -52,6 +52,7 @@
     box-sizing: border-box;
     // display: flex;
     // flex-direction: column;
+    height: auto;
     width: 100%;
     // border: 1px solid black;
     padding: 15px;
@@ -110,7 +111,7 @@
       background-color: #fff;
       position: absolute;
       top: 10px;
-      right: 40px;
+      right: 20px;
       border-radius: 4px;
       box-shadow: 3px 5px 20px 0 rgba(0, 0, 0, 0.04);
       z-index: 10;
